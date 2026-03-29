@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Platform Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'status-pending': '#FBBF24',  // Amber-400
+                        'status-active': '#10B981',   // Emerald-500
+                        'status-banned': '#EF4444',   // Red-500
+                        'status-new': '#3B82F6',      // Blue-500
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen font-sans">
+
+    <nav class="bg-gray-800 shadow-lg p-4 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-white">Platform Administrator</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm font-medium text-gray-300 hidden sm:inline-block">Welcome, Admin</span>
+                <button onclick="logout()"
+                    class="text-sm font-medium text-red-400 hover:text-white transition">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">System Administration Overview</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-indigo-600">
+                <p class="text-sm font-medium text-gray-500">Total Reports</p>
+                <p class="text-4xl font-extrabold text-gray-900 mt-1">1,250</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-status-pending">
+                <p class="text-sm font-medium text-gray-500">New Registrations</p>
+                <p class="text-4xl font-extrabold text-gray-900 mt-1">28</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-status-active">
+                <p class="text-sm font-medium text-gray-500">Active Programs</p>
+                <p class="text-4xl font-extrabold text-gray-900 mt-1">45</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-600">
+                <p class="text-sm font-medium text-gray-500">Bounty Budget</p>
+                <p class="text-4xl font-extrabold text-gray-900 mt-1">$4.2M</p>
+            </div>
+        </div>
+
+        <section class="bg-white p-6 rounded-xl shadow-lg overflow-hidden mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">User Management</h3>
+                <a href="/admin/users"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-sm">
+                    View All Users
+                </a>
+                <!-- <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-sm">View All Users</button> -->
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">User ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Name/Company</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Role</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Status</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="admin-user-table">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 rounded-xl shadow-lg overflow-hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">Program Management</h3>
+                <!-- <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg text-sm">+
+                    Create New Program</button> -->
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Program Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Owner ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Reports</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Acme Corp Security</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">PO-001</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">15</td>
+                            <td class="px-6 py-4"><span
+                                    class="px-2 py-1 text-xs font-semibold rounded-full bg-status-active text-white">Active</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium"><a href="#"
+                                    class="text-red-600 hover:text-red-900">Deactivate</a></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900">Beta App Launch</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">PO-005</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">0</td>
+                            <td class="px-6 py-4"><span
+                                    class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Draft</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium"><a href="#"
+                                    class="text-indigo-600 hover:text-indigo-900">Approve</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Dummy data for User Management
+        const users = [
+            { id: 'USR-001', name: 'John Doe', role: 'Researcher', status: 'Active' },
+            { id: 'COM-002', name: 'SecureTech Inc', role: 'Company', status: 'Pending' },
+            { id: 'USR-003', name: 'Jane Smith', role: 'Researcher', status: 'Banned' }
+        ];
+
+        function loadUsers() {
+            const table = document.getElementById('admin-user-table');
+            users.forEach(user => {
+                let statusClass = '';
+                if (user.status === 'Active') statusClass = 'bg-status-active text-white';
+                else if (user.status === 'Pending') statusClass = 'bg-status-pending text-gray-800';
+                else statusClass = 'bg-status-banned text-white';
+
+                const row = `<tr>
+                    <td class="px-6 py-4 text-sm font-medium text-indigo-600">${user.id}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600">${user.name}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600">${user.role}</td>
+                    <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold rounded-full ${statusClass}">${user.status}</span></td>
+                    <td class="px-6 py-4 text-sm font-medium space-x-2">
+                    </td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+
+        window.onload = loadUsers;
+
+        function logout() {
+            alert('Logging out administrator...');
+            window.location.href = '/';
+        }
+    </script>
+</body>
+
+</html>

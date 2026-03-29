@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Researcher Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen font-sans">
+
+    <nav class="bg-white shadow-md p-4 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-indigo-600">Bug Bounty Hub</h1>
+
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-gray-700 hidden sm:inline">
+                    Welcome, Researcher!
+                </span>
+
+                <a href="/learn" class="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 text-sm">
+                    Learn
+                </a>
+
+                <a href="/new_target" class="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 text-sm">
+                    New Target
+                </a>
+
+                <a href="/submit-report" class="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 text-sm">
+                    Submit New Report
+                </a>
+
+                <button onclick="logout()" class="text-sm font-medium text-red-500 hover:text-red-700">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6">
+
+        <h2 class="text-3xl font-bold mb-6 border-b pb-2">
+            My Researcher Dashboard
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded shadow">
+                <p class="text-sm text-gray-500">Reputation</p>
+                <p class="text-3xl font-bold">1500</p>
+            </div>
+
+            <div class="bg-white p-6 rounded shadow">
+                <p class="text-sm text-gray-500">Rank</p>
+                <p class="text-3xl font-bold">#45</p>
+            </div>
+
+            <div class="bg-white p-6 rounded shadow">
+                <p class="text-sm text-gray-500">Accepted</p>
+                <p class="text-3xl font-bold">12</p>
+            </div>
+
+            <div class="bg-white p-6 rounded shadow">
+                <p class="text-sm text-gray-500">Bounty</p>
+                <p class="text-3xl font-bold">$4500</p>
+            </div>
+        </div>
+
+        <section class="bg-white p-6 rounded shadow overflow-x-auto">
+            <div class="flex justify-between mb-4">
+                <h3 class="text-xl font-semibold">My Reports</h3>
+                <a href="/submit-report" class="bg-indigo-600 text-white px-4 py-2 rounded text-sm hover:bg-indigo-700">
+                    + New Report
+                </a>
+            </div>
+
+            <table class="w-full border text-left">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="p-3 text-sm font-semibold text-gray-700">Report ID</th>
+                        <th class="p-3 text-sm font-semibold text-gray-700">Program/Title</th>
+                        <th class="p-3 text-sm font-semibold text-gray-700">Status</th>
+                        <th class="p-3 text-sm font-semibold text-gray-700">Date</th>
+                        <th class="p-3 text-sm font-semibold text-gray-700">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for report in reports %}
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="p-3 text-xs font-mono text-indigo-600">
+                            {{ report._id }}
+                        </td>
+                        
+                        <td class="p-3 text-sm text-gray-800">
+                            {{ report.title }}
+                        </td>
+                        
+                        <td class="p-3 text-sm">
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full 
+                                {% if report.status == 'Pending' %} bg-yellow-100 text-yellow-800 
+                                {% else %} bg-green-100 text-green-800 {% endif %}">
+                                {{ report.status }}
+                            </span>
+                        </td>
+
+                        <td class="p-3 text-sm text-gray-600">
+                            {{ report.created_at.strftime('%Y-%m-%d') if report.created_at else "Recent" }}
+                        </td>
+
+                        <td class="p-3 text-sm">
+                            <button class="text-indigo-600 hover:text-indigo-900 font-medium">View</button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="p-8 text-center text-gray-500 italic">
+                            No bug reports found. Start hunting!
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <script>
+        function logout() {
+            if(confirm("Are you sure you want to logout?")) {
+                window.location.href = "/";
+            }
+        }
+    </script>
+
+</body>
+</html>

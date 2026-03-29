@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Center - Essential Bug Bounty Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="/researcher_dashboard" class="flex-shrink-0 text-xl font-bold text-indigo-600">
+                    Bug Bounty Hub
+                </a>
+                <div class="flex items-center space-x-4">
+                    <a href="/back_hacker_dashboard" class="text-gray-700 hover:text-indigo-600 text-sm font-medium transition">Dashboard</a>
+                    <a href="/learn" class="text-sm font-bold bg-indigo-600 text-white px-3 py-1 rounded-lg hover:bg-indigo-700 transition">Learn</a>
+                    <button onclick="logout()" class="text-red-500 hover:text-red-700 text-sm font-medium transition">Logout</button>
+                
+                    <script>
+                        function logout() {
+                            alert("Logging out...");
+                            window.location.href = "/";
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+        
+        <h1 class="text-4xl font-extrabold text-gray-900 text-center mb-10 border-b pb-4">
+            Learn Essential Bug Bounty Skills
+        </h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="video-grid">
+            
+            <div class="bg-white shadow-xl rounded-xl overflow-hidden">
+                <h2 class="text-xl font-semibold text-gray-800 p-4 border-b">1. SQL Injection Explained (OWASP A03)</h2>
+                <div class="relative w-full" style="padding-bottom: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/ciT4g3l3FwI" 
+                        title="SQL Injection Tutorial" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-xl rounded-xl overflow-hidden">
+                <h2 class="text-xl font-semibold text-gray-800 p-4 border-b">2. Cross-Site Scripting (XSS) Basics</h2>
+                <div class="relative w-full" style="padding-bottom: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/Fw91n68E71g" 
+                        title="XSS Tutorial" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-xl rounded-xl overflow-hidden">
+                <h2 class="text-xl font-semibold text-gray-800 p-4 border-b">3. Essential Tool: Burp Suite Setup</h2>
+                <div class="relative w-full" style="padding-bottom: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/5U7TzF-DThA" 
+                        title="Burp Suite Setup" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-xl rounded-xl overflow-hidden">
+                <h2 class="text-xl font-semibold text-gray-800 p-4 border-b">4. Broken Access Control (IDOR, BOLA)</h2>
+                <div class="relative w-full" style="padding-bottom: 56.25%;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/xL1R29i9290" 
+                        title="Broken Access Control" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        function logout() {
+            // Placeholder for authentication logic: clear token, redirect to login
+            alert('Logging out...');
+            window.location.href = 'index.html'; 
+        }
+    </script>
+</body>
+</html>
